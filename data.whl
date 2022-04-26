@@ -1,0 +1,226 @@
+; Wheel, copyright (c) 2020 - present by Arno van der Vegt
+; Distributed under an MIT
+
+; ================================== COMMANDS ==================================
+#define CMD_NONE                      0
+#define CMD_SELECT_ROBOT              1
+#define CMD_REV                       2
+#define CMD_FWD                       3
+#define CMD_STOP                      4
+#define CMD_STOP_ALL                  5
+#define CMD_RESET                     6
+#define CMD_CONVEYOR_BAR_UP           7
+#define CMD_CONVEYOR_BAR_DOWN         8
+#define CMD_CONVEYOR_FROM_1_TO_2      9
+#define CMD_CONVEYOR_FROM_2_TO_3     10
+#define CMD_CONVEYOR_FROM_3_TO_4     11
+#define CMD_CONVEYOR_FROM_4_TO_5     12
+#define CMD_START_SEQUENCE0          13
+#define CMD_START_SEQUENCE1          14
+#define CMD_START_SEQUENCE2          15
+#define CMD_START_SEQUENCE3          16
+#define CMD_START_SEQUENCE4          17
+#define CMD_ORDER_ADD_ITEM           18
+#define CMD_ORDER_CLEAR              19
+#define CMD_ORDER_RUN                20
+
+; ================================== ROBOT 1 ===================================
+#define ROBOT1_MOVE_TO_CONVEYOR       0
+#define ROBOT1_PICKUP1                1
+#define ROBOT1_PICKUP2                2
+#define ROBOT1_LOAD                   3
+
+#define ROBOT1_SEQUENCE_PICKUP1       0
+#define ROBOT1_SEQUENCE_PICKUP2       3
+#define ROBOT1_SEQUENCE_LOAD          6
+
+; ================================== ROBOT 2 ===================================
+#define ROBOT2_MOVE_TO_CONVEYOR       0
+#define ROBOT2_PICKUP1                1
+#define ROBOT2_PICKUP2                2
+
+#define ROBOT2_SEQUENCE_PICKUP1       0
+#define ROBOT2_SEQUENCE_PICKUP2       3
+
+; ================================== ROBOT 3 ===================================
+#define ROBOT3_PICKUP1                0
+#define ROBOT3_PICKUP2                1
+#define ROBOT3_MOVE_TO_CONVEYOR       2
+#define ROBOT3_DROP                   3
+#define ROBOT3_LOAD                   4
+
+#define ROBOT3_SEQUENCE_PICKUP_DROP1  0
+#define ROBOT3_SEQUENCE_PICKUP1       4
+#define ROBOT3_SEQUENCE_DROP1         7
+#define ROBOT3_SEQUENCE_PICKUP_DROP2  9
+#define ROBOT3_SEQUENCE_PICKUP2      13
+#define ROBOT3_SEQUENCE_DROP2        16
+#define ROBOT3_SEQUENCE_LOAD         18
+
+; ================================== ROBOT 4 ===================================
+#define ROBOT4_PICKUP1                0
+#define ROBOT4_PICKUP2                1
+#define ROBOT4_MOVE_TO_CONVEYOR       2
+#define ROBOT4_DROP                   3
+#define ROBOT4_LOAD                   4
+
+#define ROBOT4_SEQUENCE_PICKUP_DROP1  0
+#define ROBOT4_SEQUENCE_PICKUP1       4
+#define ROBOT4_SEQUENCE_DROP1         7
+#define ROBOT4_SEQUENCE_PICKUP_DROP2  9
+#define ROBOT4_SEQUENCE_PICKUP2      13
+#define ROBOT4_SEQUENCE_DROP2        16
+#define ROBOT4_SEQUENCE_LOAD         18
+
+; ================================== ROBOT 5 ===================================
+#define ROBOT5_MOVE_TO1               0
+#define ROBOT5_MOVE_TO2               1
+#define ROBOT5_MOVE_TO3               2
+#define ROBOT5_MOVE_TO4               3
+
+#define ROBOT4_SEQUENCE_MOVE_TO1      0
+#define ROBOT4_SEQUENCE_MOVE_TO2      2
+#define ROBOT4_SEQUENCE_MOVE_TO3      4
+#define ROBOT4_SEQUENCE_MOVE_TO4      6
+
+; ================================= COMPONENTS =================================
+#define FACTORY_FORM_INTERVAL1                  0xF4BC22B5
+#define FACTORY_FORM_BUTTON_CONVEYOR1TO2        0x218FA9CA
+#define FACTORY_FORM_BUTTON_CONVEYOR2TO3        0xE3CB1067
+#define FACTORY_FORM_BUTTON_CONVEYOR3TO4        0xA0EFE184
+#define FACTORY_FORM_BUTTON_CONVEYOR_BAR_DOWN   0xAEED0D77
+#define FACTORY_FORM_BUTTON_CONVEYOR_BAR_UP     0x4E637E50
+#define FACTORY_FORM_BUTTON_MOTOR_A1            0xF609DD46
+#define FACTORY_FORM_BUTTON_MOTOR_A2            0xCEDD8E66
+#define FACTORY_FORM_BUTTON_MOTOR_B1            0xBE951D0C
+#define FACTORY_FORM_BUTTON_MOTOR_B2            0x37ECD490
+#define FACTORY_FORM_BUTTON_MOTOR_C1            0xCBF97685
+#define FACTORY_FORM_BUTTON_MOTOR_C2            0xEAB1FA2D
+#define FACTORY_FORM_BUTTON_MOTOR_D1            0x43C6EA33
+#define FACTORY_FORM_BUTTON_MOTOR_D2            0xEDF83F7F
+#define FACTORY_FORM_BUTTON_ORDER_ADD_ITEM      0xAEA12518
+#define FACTORY_FORM_BUTTON_ORDER_CLEAR         0x2F1A9961
+#define FACTORY_FORM_BUTTON_ORDER_RUN           0x25773976
+#define FACTORY_FORM_BUTTON_RESET               0x99C1B371
+#define FACTORY_FORM_BUTTON_RESET_INVENTORY     0x6A2D7F1A
+#define FACTORY_FORM_BUTTON_ROBOT1_LOAD         0xBF050D10
+#define FACTORY_FORM_BUTTON_ROBOT1_PICKUP1      0xCBA522FC
+#define FACTORY_FORM_BUTTON_ROBOT1_PICKUP2      0xB05E3061
+#define FACTORY_FORM_BUTTON_ROBOT2_PICKUP1      0x295945A3
+#define FACTORY_FORM_BUTTON_ROBOT2_PICKUP2      0xFCFE304F
+#define FACTORY_FORM_BUTTON_ROBOT3_DROP1        0x648B4F2E
+#define FACTORY_FORM_BUTTON_ROBOT3_DROP2        0x62E540A8
+#define FACTORY_FORM_BUTTON_ROBOT3_LOAD         0xCE30371C
+#define FACTORY_FORM_BUTTON_ROBOT3_PICKUP1      0x2EED6805
+#define FACTORY_FORM_BUTTON_ROBOT3_PICKUP2      0x55D11E40
+#define FACTORY_FORM_BUTTON_ROBOT3_PICKUP_DROP1 0x5FFFDB15
+#define FACTORY_FORM_BUTTON_ROBOT3_PICKUP_DROP2 0xF446D8AE
+#define FACTORY_FORM_BUTTON_ROBOT4_DROP1        0x6B7272E1
+#define FACTORY_FORM_BUTTON_ROBOT4_DROP2        0xEC2638AE
+#define FACTORY_FORM_BUTTON_ROBOT4_LOAD         0xC2461F67
+#define FACTORY_FORM_BUTTON_ROBOT4_PICKUP1      0x79CCFE9E
+#define FACTORY_FORM_BUTTON_ROBOT4_PICKUP2      0xD0337F85
+#define FACTORY_FORM_BUTTON_ROBOT4_PICKUP_DROP1 0x436BB2AD
+#define FACTORY_FORM_BUTTON_ROBOT4_PICKUP_DROP2 0x62EB1567
+#define FACTORY_FORM_BUTTON_STOP                0x7D0EA2DE
+#define FACTORY_FORM_BUTTON_STORAGE1            0xAFEFFDF1
+#define FACTORY_FORM_BUTTON_STORAGE2            0x72C1241E
+#define FACTORY_FORM_BUTTON_STORAGE3            0x05232AFF
+#define FACTORY_FORM_BUTTON_STORAGE4            0x6585BC25
+#define FACTORY_FORM_DROPDOWN_BODY              0x3123C05D
+#define FACTORY_FORM_DROPDOWN_SEAT              0x0CC22717
+#define FACTORY_FORM_IMAGE1                     0xCB7FFF70
+#define FACTORY_FORM_LABEL_INVENTORY_BODY_BLUE  0x95E4E6FD
+#define FACTORY_FORM_LABEL_INVENTORY_BODY_BROWN 0xF8C8C91F
+#define FACTORY_FORM_LABEL_INVENTORY_BODY_GREEN 0x1E3D3AE7
+#define FACTORY_FORM_LABEL_INVENTORY_BODY_RED   0xE2CC8E15
+#define FACTORY_FORM_LABEL_INVENTORY_CHASSIS    0x62AF6790
+#define FACTORY_FORM_LABEL_INVENTORY_SEAT_GREY  0xE149779E
+#define FACTORY_FORM_LABEL_INVENTORY_SEAT_TAN   0x0940AF16
+#define FACTORY_FORM_LABEL_MOTOR1               0x4925780C
+#define FACTORY_FORM_LABEL_MOTOR2               0xE8065F64
+#define FACTORY_FORM_LABEL_MOTOR3               0x0728854D
+#define FACTORY_FORM_LABEL_ORDER_BODY           0x1382B970
+#define FACTORY_FORM_LABEL_ORDER_SEAT           0xA8FE3348
+#define FACTORY_FORM_ORDER_LIST_ITEMS           0x23C689A4
+#define FACTORY_FORM_MAIN_TABS                  0xC9EA066D
+#define FACTORY_FORM_SELECT_ROBOT               0x9A4E0D42
+#define FACTORY_FORM_TITLE_BODY_BLUE            0xB3574234
+#define FACTORY_FORM_TITLE_BODY_BROWN           0xA46D91CD
+#define FACTORY_FORM_TITLE_BODY_GREEN           0x8E633B33
+#define FACTORY_FORM_TITLE_BODY_RED             0xF1403B06
+#define FACTORY_FORM_TITLE_CHASSIS              0x7FB3C67A
+#define FACTORY_FORM_TITLE_CONVEYOR             0x5BD33922
+#define FACTORY_FORM_TITLE_ORDER_ITEMS          0x4EA9B099
+#define FACTORY_FORM_TITLE_ROBOT1               0xDE321435
+#define FACTORY_FORM_TITLE_ROBOT2               0xC6ED624B
+#define FACTORY_FORM_TITLE_ROBOT3               0x70BA54D1
+#define FACTORY_FORM_TITLE_ROBOT4               0x792BB19F
+#define FACTORY_FORM_TITLE_SEAT_GREY            0x5810661C
+#define FACTORY_FORM_TITLE_SEAT_TAN             0x2A178B54
+#define FACTORY_FORM_TITLE_STORAGE              0x04C7CA72
+#define FACTORY_FORM_UPDATE_POS_INTERVAL        0xF4BC22B5
+#define FACTORY_FORM_STATUS_ROBOT1              0xB1E56533
+#define FACTORY_FORM_STATUS_ROBOT2              0x4110E8B6
+#define FACTORY_FORM_STATUS_ROBOT3              0xBC7EA299
+#define FACTORY_FORM_STATUS_ROBOT4              0x2A8CF3B0
+#define FACTORY_FORM_STATUS_ROBOT5              0x16DB4501
+#define FACTORY_FORM_CAR1_BODY_LABEL            0x4E2F5259
+#define FACTORY_FORM_CAR1_SEAT_LABEL            0x54749BB9
+#define FACTORY_FORM_CAR1_STATE_LABEL           0x9702AB14
+#define FACTORY_FORM_CAR1_TITLE                 0xDEEE6581
+#define FACTORY_FORM_CAR2_BODY_LABEL            0x5A2206C7
+#define FACTORY_FORM_CAR2_SEAT_LABEL            0xA0D842F6
+#define FACTORY_FORM_CAR2_STATE_LABEL           0xDA65C508
+#define FACTORY_FORM_CAR2_TITLE                 0x90F42716
+#define FACTORY_FORM_CAR3_BODY_LABEL            0x07A9CC28
+#define FACTORY_FORM_CAR3_SEAT_LABEL            0xD792C046
+#define FACTORY_FORM_CAR3_STATE_LABEL           0x0000329B
+#define FACTORY_FORM_CAR3_TITLE                 0x15DD1AB8
+#define FACTORY_FORM_CAR4_BODY_LABEL            0x8FA869A4
+#define FACTORY_FORM_CAR4_SEAT_LABEL            0xC967177C
+#define FACTORY_FORM_CAR4_STATE_LABEL           0x99F89887
+#define FACTORY_FORM_CAR4_TITLE                 0x776BE7E5
+#define FACTORY_FORM_POSITION1_STATUS_LIGHT     0xEDDA39FD
+#define FACTORY_FORM_POSITION2_STATUS_LIGHT     0x669EB0F3
+#define FACTORY_FORM_POSITION3_STATUS_LIGHT     0xA4EB805F
+#define FACTORY_FORM_POSITION4_STATUS_LIGHT     0x1A8C7DB2
+#define FACTORY_FORM_POSITION5_STATUS_LIGHT     0x1A83BADF
+#define FACTORY_FORM_POSITION_TITLE             0xF2E2B9A6
+
+; ================================ SEAT COLORS =================================
+#define SEAT_COLOR_TAN                          0
+#define SEAT_COLOR_GRAY                         1
+
+string seatColors[2] = ["Tan", "Gray"]
+
+; ================================ BODY COLORS =================================
+#define BODY_COLOR_RED                          0
+#define BODY_COLOR_BLUE                         1
+#define BODY_COLOR_GREEN                        2
+#define BODY_COLOR_BROWN                        3
+
+string bodyColors[4] = ["Red", "Blue", "Green", "Brown"]
+
+string seatAndBodyColor[8] = [
+    "Tan seat, red body",
+    "Tan seat, blue body",
+    "Tan seat, brown body",
+    "Tan seat, green body",
+    "Grey seat, red body",
+    "Grey seat, blue body",
+    "Grey seat, green body",
+    "Grey seat, brown body"
+]
+
+; =========================== CAR POSITION IN FACTORY ==========================
+#define POSITION_IN_STORAGE                     0
+#define POSITION_ON_CONVEYOR                    1
+#define POSITION_ROBOT2                         2
+#define POSITION_ROBOT3                         3
+#define POSITION_ROBOT4                         4
+
+number mainWindow
+number command
+number commandIndex
+
